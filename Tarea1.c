@@ -22,7 +22,8 @@ int MenuPrincipal(){
 int main(){
 
   //se crea el mazo
-  CreateDirectoryIfNotExist();
+  char carp[5] = "Mazo";
+  CreateDirectoryIfNotExist(carp);
 
   //crea las cartas de colores
   int i;
@@ -116,6 +117,20 @@ int main(){
     printf("----------------------\n");
     return 0;
   }
+  // Crear jugadores
+  int b;
+
+  for (b = 0; b < 4; b++) {
+      char carpe[9] = "Jugador";
+      char str[9];
+      sprintf(str, "%d", b+1);
+      strcat(carpe,str);
+      CreateDirectoryIfNotExist(carpe);
+  }
+  //Crear carpeta de cartar jugadas
+  char str[8]= "EnJuego";
+  CreateDirectoryIfNotExist(str);
+
   printf("perdiste F\n");
   printf("----------------------\n");
   return 0;
