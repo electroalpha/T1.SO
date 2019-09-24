@@ -7,11 +7,9 @@
 #include <dirent.h>
 
 
-void CreateDirectoryIfNotExist()
+void CreateDirectoryIfNotExist(char s[])
 {
   int checkCardsFolder;
-  char* dirname = "Mazo";
 
-  checkCardsFolder = mkdir(dirname, ACCESSPERMS);
+  checkCardsFolder = mkdir(s, ACCESSPERMS);
 }
-
