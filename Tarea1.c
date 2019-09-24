@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include "DirectoryHandler.h"
 #include <dirent.h>
-
+#include <fcntl.h>
 
 int MenuPrincipal(){
   int option;
@@ -23,7 +23,7 @@ int main(){
 
   //se crea el mazo
   CreateDirectoryIfNotExist();
-  
+
   //crea las cartas de colores
   for (int i = 0; i < 4; i ++){
     char color[10];
@@ -50,8 +50,8 @@ int main(){
         sprintf(fileName, "%d ", j);
         strcat(fileName, color);
         snprintf(buffer, sizeof(buffer), "Mazo/%s.txt", fileName);
-        FILE* file = fopen(buffer, "w");
-        fclose(file);
+        int file = open(buffer, O_CREAT,S_IRUSR | S_IROTH|S_IXUSR|S_IXOTH);
+        close(file);
       }
 
       //crea las cartas que son duplicadas
@@ -81,8 +81,8 @@ int main(){
           strcat(fileName, temp);
 
           snprintf(buffer, sizeof(buffer), "Mazo/%s.txt", fileName);
-          FILE* file = fopen(buffer, "w");
-          fclose(file);
+          int file = open(buffer, O_CREAT,S_IRUSR | S_IROTH|S_IXUSR|S_IXOTH);
+          close(file);
           }
         }
     }
@@ -94,13 +94,13 @@ int main(){
     for (int i = 1; i < 5; i++ ){
       if(l == 0){
         snprintf(buffer, sizeof(buffer), "Mazo/cambio de color (%d).txt", i);
-        FILE* file = fopen(buffer, "w");
-        fclose(file);
+        int file = open(buffer, O_CREAT,S_IRUSR | S_IROTH|S_IXUSR|S_IXOTH);
+        close(file);
       }
       else{
         snprintf(buffer, sizeof(buffer), "Mazo/+4 (%d).txt", i);
-        FILE* file = fopen(buffer, "w");
-        fclose(file);
+        int file = open(buffer, O_CREAT,S_IRUSR | S_IROTH|S_IXUSR|S_IXOTH);
+        close(file);
       }
     }
   }
@@ -115,4 +115,3 @@ int main(){
   printf("----------------------\n");
   return 0;
 }
-
