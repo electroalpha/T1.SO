@@ -25,7 +25,8 @@ int main(){
   CreateDirectoryIfNotExist();
 
   //crea las cartas de colores
-  for (int i = 0; i < 4; i ++){
+  int i;
+  for (i = 0; i < 4; i ++){
     char color[10];
     switch(i){
         case 0:
@@ -41,7 +42,8 @@ int main(){
             strcpy(color, "amarillo");
             break;
     }
-    for (int j = 0; j <= 12; j++){
+    int j;
+    for (j = 0; j <= 12; j++){
       char buffer[260];
       char fileName[100];
 
@@ -56,7 +58,8 @@ int main(){
 
       //crea las cartas que son duplicadas
       else{
-        for (int k = 1; k < 3; k++){
+        int k;
+        for (k = 1; k < 3; k++){
           if (j == 10){
             char rev[10] = "salto ";
             sprintf(fileName, "%s",rev);
@@ -89,9 +92,11 @@ int main(){
   }
 
   //crea las cartas negras
-  for (int l = 0 ; l < 2 ; l++){
+  int l;
+  for (l = 0 ; l < 2 ; l++){
     char buffer[260];
-    for (int i = 1; i < 5; i++ ){
+    int i;
+    for (i = 1; i < 5; i++ ){
       if(l == 0){
         snprintf(buffer, sizeof(buffer), "Mazo/cambio de color (%d).txt", i);
         int file = open(buffer, O_CREAT,S_IRUSR | S_IROTH|S_IXUSR|S_IXOTH);
