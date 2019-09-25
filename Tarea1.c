@@ -8,6 +8,7 @@
 #include <dirent.h>
 #include <fcntl.h>
 
+
 int MenuPrincipal(){
   int option;
   printf("¡Bienvenido a UNO!\n");
@@ -130,7 +131,57 @@ int main(){
   //Crear carpeta de cartar jugadas
   char str[8]= "EnJuego";
   CreateDirectoryIfNotExist(str);
+  // Repartir cartas
+  int k =108;
+  int g = 0;
+  char card[15];
+  while (g<29) {
+      int temp = rand()%(k+1);
+      char b[15];
+      obtenerNombre(temp,b);
+      strcpy(card,b);
+      if (!((strcmp(card,".")== 0) || (strcmp(card,"..") ==0))){
+          if (g<7) {
+              char source [169] ="/home/fabio/Escritorio/Universidad/SO/Tarea 1/Mazo/";
+              char dest [169] = "/home/fabio/Escritorio/Universidad/SO/Tarea 1/Jugador1/";
+              strcat(source,card);
+              strcat(dest,card);
+              rename(source,dest);
+          }
+          else if (g >= 7 && g <14) {
+              char source [169] ="/home/fabio/Escritorio/Universidad/SO/Tarea 1/Mazo/";
+              char dest [169] = "/home/fabio/Escritorio/Universidad/SO/Tarea 1/Jugador2/";
+              strcat(source,card);
+              strcat(dest,card);
+              rename(source,dest);
+          }
+          else if (g >= 14 && g <21) {
+              char source [169] ="/home/fabio/Escritorio/Universidad/SO/Tarea 1/Mazo/";
+              char dest [169] = "/home/fabio/Escritorio/Universidad/SO/Tarea 1/Jugador3/";
+              strcat(source,card);
+              strcat(dest,card);
+              rename(source,dest);
+          }
+          else if (g >= 21 && g <28) {
+              char source [169] ="/home/fabio/Escritorio/Universidad/SO/Tarea 1/Mazo/";
+              char dest [169] = "/home/fabio/Escritorio/Universidad/SO/Tarea 1/Jugador4/";
+              strcat(source,card);
+              strcat(dest,card);
+              rename(source,dest);
+          }
+          else{
+              char source [169] ="/home/fabio/Escritorio/Universidad/SO/Tarea 1/Mazo/";
+              char dest [169] = "/home/fabio/Escritorio/Universidad/SO/Tarea 1/EnJuego/";
+              strcat(source,card);
+              strcat(dest,card);
+              rename(source,dest);
+          }
+          strcpy(b,"");
+          g++;
+          k--;
+      }
 
+  }
   printf("perdiste F\n");
   printf("----------------------\n");
   return 0;
