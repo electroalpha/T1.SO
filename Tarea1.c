@@ -22,11 +22,15 @@ int MenuPrincipal(){
 
 int main(){
 
-  //se crea el mazo
+  // Se crea la carpeta Mazo
+
   char carp[5] = "Mazo";
   CreateDirectoryIfNotExist(carp);
 
-  //crea las cartas de colores
+  // Comienza el proceso de creacion de las cartas de colores
+
+  // Cada for crea todos los tipos de cartas de un color
+
   int i;
   for (i = 0; i < 4; i ++){
     char color[10];
@@ -49,7 +53,8 @@ int main(){
       char buffer[260];
       char fileName[100];
 
-      //crea los 0
+      // Ya que solo existe un 0 por color, se crean estos primero
+
       if (j == 0){
         sprintf(fileName, "%d ", j);
         strcat(fileName, color);
@@ -58,7 +63,8 @@ int main(){
         close(file);
       }
 
-      //crea las cartas que son duplicadas
+      // Luego se crea el resto de cartas, 2 de cada tipo
+
       else{
         int k;
         for (k = 1; k < 3; k++){
@@ -93,7 +99,8 @@ int main(){
     }
   }
 
-  //crea las cartas negras
+  // Se crean las cartas negras, 4 de cada tipo
+
   int l;
   for (l = 0 ; l < 2 ; l++){
     char buffer[260];
@@ -112,13 +119,18 @@ int main(){
     }
   }
 
+  // Menu principal del juego
+
   int opcion = MenuPrincipal();
   if (opcion == 0){
     printf("Has salido del juego.\n");
     printf("----------------------\n");
     return 0;
   }
-  // Crear jugadores
+  // Se comienza el proceso para crear jugadores
+
+  // Se crea una carpeta para cada jugador
+
   int b;
 
   for (b = 0; b < 4; b++) {
@@ -128,10 +140,14 @@ int main(){
       strcat(carpe,str);
       CreateDirectoryIfNotExist(carpe);
   }
-  //Crear carpeta de cartar jugadas
+
+  // Se crea la carpeta que contendra las cartas ya jugadas
+
   char str[8]= "EnJuego";
   CreateDirectoryIfNotExist(str);
-  // Repartir cartas
+
+  // Se reparten lan cartas aleatoriamente en cada carpeta de Jugador, siendo 7 para cada uno
+
   int k =108;
   int g = 0;
   char card[15];
@@ -182,6 +198,9 @@ int main(){
       }
 
   }
+
+  // En construccion...
+
   printf("perdiste F\n");
   printf("----------------------\n");
   return 0;

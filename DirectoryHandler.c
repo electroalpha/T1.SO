@@ -8,9 +8,7 @@
 
 
 void CreateDirectoryIfNotExist(char s[]){
-  int checkCardsFolder;
-
-  checkCardsFolder = mkdir(s, ACCESSPERMS);
+    mkdir(s, ACCESSPERMS);
 }
 
 void obtenerNombre(int k, char* b){
