@@ -14,7 +14,7 @@ void CreateDirectoryIfNotExist(char s[]){
 void obtenerNombre(int k, char* b){
     DIR *d;
     struct dirent *dir;
-    d = opendir("/home/fabio/Escritorio/Universidad/SO/Tarea 1/Mazo");
+    d = opendir("Mazo");
     if (d){
         int i =0;
             while ((dir = readdir(d)) != NULL){

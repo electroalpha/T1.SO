@@ -151,6 +151,7 @@ int main(){
   int k =108;
   int g = 0;
   char card[15];
+
   while (g<29) {
       int temp = rand()%(k+1);
       char b[15];
@@ -158,39 +159,69 @@ int main(){
       strcpy(card,b);
       if (!((strcmp(card,".")== 0) || (strcmp(card,"..") ==0))){
           if (g<7) {
-              char source [169] ="/home/fabio/Escritorio/Universidad/SO/Tarea 1/Mazo/";
-              char dest [169] = "/home/fabio/Escritorio/Universidad/SO/Tarea 1/Jugador1/";
+              char* source = malloc(sizeof(char)*255);
+              strcpy(source, "Mazo/");
+
+              char* dest = malloc(sizeof(char)*500);
+              strcpy(dest, "Jugador1/");
+
               strcat(source,card);
               strcat(dest,card);
               rename(source,dest);
+              free((void*)dest);
+              free((void*)source);
           }
           else if (g >= 7 && g <14) {
-              char source [169] ="/home/fabio/Escritorio/Universidad/SO/Tarea 1/Mazo/";
-              char dest [169] = "/home/fabio/Escritorio/Universidad/SO/Tarea 1/Jugador2/";
+              char* source = malloc(sizeof(char)*255);
+              strcpy(source, "Mazo/");
+
+              char* dest = malloc(sizeof(char)*500);
+              strcpy(dest, "Jugador2/");
+
               strcat(source,card);
               strcat(dest,card);
               rename(source,dest);
+              free((void*)dest);
+              free((void*)source);
           }
           else if (g >= 14 && g <21) {
-              char source [169] ="/home/fabio/Escritorio/Universidad/SO/Tarea 1/Mazo/";
-              char dest [169] = "/home/fabio/Escritorio/Universidad/SO/Tarea 1/Jugador3/";
+              char* source = malloc(sizeof(char)*255);
+              strcpy(source, "Mazo/");
+
+              char* dest = malloc(sizeof(char)*500);
+              strcpy(dest, "Jugador3/");
+
               strcat(source,card);
               strcat(dest,card);
               rename(source,dest);
+              free((void*)dest);
+              free((void*)source);
           }
           else if (g >= 21 && g <28) {
-              char source [169] ="/home/fabio/Escritorio/Universidad/SO/Tarea 1/Mazo/";
-              char dest [169] = "/home/fabio/Escritorio/Universidad/SO/Tarea 1/Jugador4/";
+              char* source = malloc(sizeof(char)*255);
+              strcpy(source, "Mazo/");
+
+              char* dest = malloc(sizeof(char)*500);
+              strcpy(dest, "Jugador4/");
+
               strcat(source,card);
               strcat(dest,card);
               rename(source,dest);
+              free((void*)dest);
+              free((void*)source);
           }
           else{
-              char source [169] ="/home/fabio/Escritorio/Universidad/SO/Tarea 1/Mazo/";
-              char dest [169] = "/home/fabio/Escritorio/Universidad/SO/Tarea 1/EnJuego/";
+              char* source = malloc(sizeof(char)*255);
+              strcpy(source, "Mazo/");
+
+              char* dest = malloc(sizeof(char)*500);
+              strcpy(dest, "EnJuego/");
+
               strcat(source,card);
               strcat(dest,card);
               rename(source,dest);
+              free((void*)dest);
+              free((void*)source);
           }
           strcpy(b,"");
           g++;
@@ -198,6 +229,7 @@ int main(){
       }
 
   }
+
 
   // En construccion...
 
