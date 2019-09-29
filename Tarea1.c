@@ -7,6 +7,7 @@
 #include "DirectoryHandler.h"
 #include <dirent.h>
 #include <fcntl.h>
+#include <time.h>
 
 
 int MenuPrincipal(){
@@ -153,6 +154,7 @@ int main(){
   char card[15];
 
   while (g<29) {
+      srand(time(NULL));
       int temp = rand()%(k+1);
       char b[15];
       obtenerNombre(temp,b);
