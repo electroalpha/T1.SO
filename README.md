@@ -6,7 +6,7 @@ Integrantes:
 
 
 Para la ejecución del programa:
-  -Ingresar a la carpeta del programa descargado via terminal
+  -Ingresar via terminal, a la carpeta del programa descargado.
 
   -Ejecutar el comando: make Tarea
     -Esto generara los .o de cada .c implementado en la tarea.
