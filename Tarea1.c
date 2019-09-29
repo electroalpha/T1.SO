@@ -23,6 +23,9 @@ int MenuPrincipal(){
 
 int main(){
 
+  //Se borran cartas si es que quedaron de juegos anteriores en sus carpetas correspondientes
+  borrarAnt();
+
   // Se crea la carpeta Mazo
 
   char carp[5] = "Mazo";

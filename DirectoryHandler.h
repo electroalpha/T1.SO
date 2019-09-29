@@ -3,4 +3,5 @@
 
 void CreateDirectoryIfNotExist();
 void obtenerNombre(int k,char* b);
+void borrarAnt();
 #endif

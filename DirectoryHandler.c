@@ -26,3 +26,35 @@ void obtenerNombre(int k, char* b){
             closedir(d);
         }
     }
+
+void borrarAnt(){
+    int b;
+    for (b = 0; b < 4; b++) {
+        char carpe[9] = "Jugador";
+        char str[9];
+        sprintf(str, "%d", b+1);
+        strcat(carpe,str);
+        DIR *d;
+        struct dirent *dir;
+        d = opendir(carpe);
+        if (d){
+            while ((dir = readdir(d)) != NULL){
+                chdir(carpe);
+                remove(dir->d_name);
+                chdir("..");
+                }
+                closedir(d);
+            }
+    }
+    DIR *d;
+    struct dirent *dir;
+    d = opendir("EnJuego");
+    if (d){
+        while ((dir = readdir(d)) != NULL){
+            chdir("EnJuego");
+            remove(dir->d_name);
+            chdir("..");
+            }
+            closedir(d);
+        }
+}
