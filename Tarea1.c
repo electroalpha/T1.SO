@@ -23,6 +23,20 @@ int MenuPrincipal(){
   return option;
 }
 
+void SacarCartas(char* jugador, int cartas_a_sacar){
+  int total = ContarMazo("Mazo");
+
+  while(cartas_a_sacar > 0){
+    srand(time(NULL));
+    int temp = rand()%(total+1);
+    char card[15];
+
+    obtenerNombre(temp,card,"Mazo");
+    MoveFile("Mazo/",jugador,card);
+    cartas_a_sacar--;
+  }
+}
+
 int main(){
 
   //Se borran cartas si es que quedaron de juegos anteriores en sus carpetas correspondientes
@@ -280,7 +294,17 @@ int main(){
           bzero(strGrande,256);
           scanf("%s",strGrande);
           if (strcmp(strGrande,"jugar")==0){
-            printf("Player 1 jugó por primera vez\nSe le comunica al jugador 2 su turno\n");
+            int eleccion = ChooseFile("Jugador1");
+            if(eleccion == -1){
+              SacarCartas("Jugador1/",1);
+            }
+            else{
+              char cardd[15];
+              obtenerNombre(eleccion,cardd,"Jugador1");
+              MoveFile("Jugador1/","EnJuego/",cardd);
+              printf("Player 1 jugó un %s\n",cardd);
+            }
+            printf("Se le comunica al jugador 2 su turno\n");
             write(pipePH[1],strGrande,strlen(strGrande));
           }
           else{
@@ -297,7 +321,17 @@ int main(){
         bzero(strGrande,256);
         nbytes = read(pipeHP[0],strGrande,256);
         if (strcmp(strGrande,"jugar")==0){
-          printf("Jugador 2 jugo.\nSe le comunica al jugador 3 su turno\n");
+          int eleccion = ChooseFile("Jugador2");
+          if(eleccion == -1){
+              SacarCartas("Jugador2/",1);   
+          }
+          else{
+            char cardd[15];
+            obtenerNombre(eleccion,cardd,"Jugador2");
+            MoveFile("Jugador2/","EnJuego/",cardd);
+            printf("Player 2 jugó un %s\n",cardd);
+          }
+          printf("Se le comunica al jugador 3 su turno\n");
           write(pipePH[3],strGrande,strlen(strGrande));
         }
         else{
@@ -313,7 +347,17 @@ int main(){
         bzero(strGrande,256);
         nbytes = read(pipeHP[2],strGrande,256);
         if (strcmp(strGrande,"jugar")==0){
-          printf("Jugador 3 jugo.\nSe le comunica al jugador 4 su turno\n");
+          int eleccion = ChooseFile("Jugador3");
+          if(eleccion == -1){
+              SacarCartas("Jugador3/",1);   
+          }
+          else{
+            char cardd[15];
+            obtenerNombre(eleccion,cardd,"Jugador3");
+            MoveFile("Jugador3/","EnJuego/",cardd);
+            printf("Player 3 jugó un %s\n",cardd);
+          }
+          printf("Se le comunica al jugador 4 su turno\n");
           write(pipePH[5],strGrande,strlen(strGrande));
         }
         else{
@@ -329,12 +373,33 @@ int main(){
         bzero(strGrande,256);
         nbytes = read(pipeHP[4],strGrande,256);
         if (strcmp(strGrande,"jugar")==0){
-          printf("Jugador 4 jugo.\nSe le comunica al jugador 1 su turno\n");
+          int eleccion = ChooseFile("Jugador4");
+          if(eleccion == -1){
+              SacarCartas("Jugador4/",1);   
+          }
+          else{
+            char cardd[15];
+            obtenerNombre(eleccion,cardd,"Jugador4");
+            MoveFile("Jugador4/","EnJuego/",cardd);
+            printf("Player 4 jugó un %s\n",cardd);
+          }
+          printf("Se le comunica al jugador 1 su turno\n");
           printf("Que desea hacer P1[jugar/fin]: ");
           bzero(strGrande,256);
           scanf("%s",strGrande);
           if (strcmp(strGrande,"jugar")==0){
-            printf("Player 1 jugó.\n Se le comunica al jugador 2 su turno\n");
+            int eleccion = ChooseFile("Jugador1");
+            if(eleccion == -1){
+              SacarCartas("Jugador1/",1);   
+            }
+            else{
+              char cardd[15];
+              obtenerNombre(eleccion,cardd,"Jugador1");
+              MoveFile("Jugador1/","EnJuego/",cardd);
+              printf("Player 1 jugó un %s\n",cardd);
+            }
+            
+            printf("Se le comunica al jugador 2 su turno\n");
             write(pipePH[1],strGrande,strlen(strGrande));
           }
           else{
@@ -384,7 +449,7 @@ int main(){
           bzero(strGrande,256);
           nbytes = read(pipePH[2],strGrande,256);
           if ( strcmp("jugar", strGrande) == 0) {
-            printf("Voy a jugar, soy el 3\nQue desea hacer P3[jugar/fin]: ");
+            printf("Voy a jugar, soy el 3\nQue desea hacer 3[jugar/fin]: ");
             bzero(strGrande,256);
             scanf("%s",strGrande);
             write(pipeHP[3],strGrande,strlen(strGrande));

@@ -17,15 +17,18 @@ void obtenerNombre(int k, char* b,char* dirname){
     d = opendir(dirname);
     if (d){
         int i =0;
-            while ((dir = readdir(d)) != NULL){
+        while ((dir = readdir(d)) != NULL){
+            if(strcmp(dir->d_name, ".") != 0 && strcmp(dir->d_name, "..") != 0){
                 if (i == k) {
                     strcpy(b,dir->d_name);
+                    break;
                 }
                 i++;
             }
-            closedir(d);
         }
+        closedir(d);
     }
+}
 
 void borrarAnt(){
     int b;
@@ -75,6 +78,8 @@ int ChooseFile(char* dirname){
         }
 
     }
+    i--;
+
     closedir(d);
     int eleccion;
 
@@ -83,7 +88,7 @@ int ChooseFile(char* dirname){
     while(flag==0){
 
         scanf("%d",&eleccion);
-        if(eleccion < -1 || eleccion > i-1){
+        if(eleccion < -1 || eleccion > i){
             printf("Elige una carta válida.\n");
         }
         else{
@@ -102,4 +107,22 @@ void MoveFile(char* dirOrg, char* dirDest, char* card){
     strcat(temp,card);
     strcat(temp2,card);
     rename(temp,temp2);
+}
+
+int ContarMazo(char* dirname){
+    DIR *d;
+    struct dirent *dir;
+    d = opendir(dirname);
+
+    int i = 0; 
+    if (d){
+        while((dir = readdir(d)) != NULL){
+            if (strcmp(dir->d_name, ".") != 0 && strcmp(dir->d_name, "..") != 0){
+                i++;
+            }
+        }
+
+    } 
+    
+    return i;
 }
