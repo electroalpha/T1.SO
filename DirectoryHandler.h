@@ -1,6 +1,7 @@
 #ifndef DIRECTORYHANDLER_H
 #define DIRECTORYHANDLER_H_
 
+void* create_shared_memory(size_t size);
 void CreateDirectoryIfNotExist();
 void obtenerNombre(int k,char* b,char* dirname);
 void borrarAnt();
