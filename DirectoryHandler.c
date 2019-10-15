@@ -5,20 +5,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <dirent.h>
-#include <sys/mman.h>
-void* create_shared_memory(size_t size) {
-  // Our memory buffer will be readable and writable:
-  int protection = PROT_READ | PROT_WRITE;
 
-  // The buffer will be shared (meaning other processes can access it), but
-  // anonymous (meaning third-party processes cannot obtain an address for it),
-  // so only this process and its children will be able to use it:
-  int visibility = MAP_SHARED | MAP_ANONYMOUS;
-
-  // The remaining parameters to `mmap()` are not important for this use case,
-  // but the manpage for `mmap` explains their purpose.
-  return mmap(NULL, size, protection, visibility, -1, 0);
-}
 
 void CreateDirectoryIfNotExist(char s[]){
     mkdir(s, ACCESSPERMS);
@@ -127,7 +114,7 @@ int ContarMazo(char* dirname){
     struct dirent *dir;
     d = opendir(dirname);
 
-    int i = 0;
+    int i = 0; 
     if (d){
         while((dir = readdir(d)) != NULL){
             if (strcmp(dir->d_name, ".") != 0 && strcmp(dir->d_name, "..") != 0){
@@ -135,7 +122,64 @@ int ContarMazo(char* dirname){
             }
         }
 
+    } 
+    
+    return i;
+}
+
+int VerificarCarta(char* EnJuego, char* Jugada){
+
+    //comprueba si la carta jugada es del mismo tipo que la En Juego
+ 
+    char tipoEnjuego[25];
+    int i;
+    for(i=0; EnJuego[i] != ' '; i++){
+        tipoEnjuego[i] = EnJuego[i];
+    }
+    tipoEnjuego[i] = '\0';
+
+    char tipoJugada[25];
+    int j;
+    for(j=0; Jugada[j] != ' '; j++){
+        tipoJugada[j] = Jugada[j];
+    }
+    tipoJugada[j] = '\0';
+
+    if(strcmp(tipoEnjuego,tipoJugada) == 0){
+        return 1;
     }
 
-    return i;
+
+    //comprueba si la carta jugada es del mismo color que la En Juego
+
+    char colorEnJuego[25];
+    int k;
+    int a=0;
+    for(k=i+1 ; (EnJuego[k] != ' ' && EnJuego[k] != '.') ; k++){
+        colorEnJuego[a] = EnJuego[k];
+        a++;
+    }
+    colorEnJuego[a]='\0';
+
+
+
+    char colorJugada[25];
+    int m;
+    int b=0;
+
+    for(m=j+1 ; (Jugada[m] != ' ') && (Jugada[m] != '.') ; m++){
+        colorJugada[b] = Jugada[m];
+        b++;
+    }
+    colorJugada[b]='\0';
+
+    printf("%s\n",colorEnJuego);
+    printf("%s\n",colorJugada);
+
+    if(strcmp(colorEnJuego,colorJugada) == 0){
+        return 1;
+    }
+
+    printf("No se puede usar esa carta, elige otra.\n");
+    return 0;
 }
